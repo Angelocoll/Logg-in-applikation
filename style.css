@@ -1,0 +1,194 @@
+body{
+    background: linear-gradient(90deg,#000,#ffffff, #7b7b7b,#fff, #000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+.cont{
+    width: 80%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+#LogginBtn{
+    width: 12rem;   
+    height: 4rem;
+    border-radius: 2px;
+    border: solid 1px black;
+    font-weight: bolder;
+    color: #000;
+    font-style: italic;
+    box-shadow: 0 0 10px rgb(255, 255, 255),
+    0 0 50px rgb(255, 255, 255);
+    
+}
+#LogginBtn:hover{
+    cursor: pointer;
+    background: black;
+    color: white;
+    box-shadow: 0 0 20px black,
+0 0 100px black, 0 0 200px black,
+0 0 400px black, 0 0 800px black;
+}
+
+
+.LoggStyle{
+    position: absolute;
+    width: 30%;
+    height: 60%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    
+}
+.RegStyle{
+    position: absolute;
+    width: 40%;
+    height: 70%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    
+}
+#Ny{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+}
+#xBtn{
+    width: 5%;
+    text-align: center;
+    border: solid black 1px;
+    position: absolute;
+    right: 0;
+    border-radius: 4px;
+}
+#xBtn:hover{
+    cursor: pointer;
+    background: rgb(247, 122, 122);
+}
+#box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+h1{
+    font-size: 3rem;
+}
+h2{
+    font-size: 1rem;
+}
+#LoggBtn{
+    margin-top: 10px;
+    border: solid rgb(0, 0, 0) 1px;
+    transition: 0.3s ease;
+    margin-bottom: 20px;
+}
+#LoggBtn:hover{
+    cursor: pointer;
+    scale: 0.9;
+    background-color: #000;
+    color: white;
+}
+#LoggBtn:active{
+    
+    scale: 0.8;
+    background-color: #000;
+    color: white;
+}
+#SkapaBtn{
+    margin-top: 10px;
+    border: solid rgb(0, 0, 0) 1px;
+    transition: 0.3s ease;
+    margin-bottom: 20px;
+}
+#SkapaBtn:hover{
+    cursor: pointer;
+    scale: 0.9;
+    background-color: #000;
+    color: white;
+}
+#SkapaBtn:active{
+    
+    scale: 0.8;
+    background-color: #000;
+    color: white;
+}
+#Reg{
+    border: none;
+    background-color: #fff;
+    text-decoration: underline;
+}
+#Reg:hover{
+    cursor: pointer;
+
+}
+#Reg:active{
+    color: #000;
+
+}
+h3{
+    font-size: 0.7rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-decoration: underline;
+}
+h3 input{
+    scale: 0.9;
+    
+}
+#error{
+    color: rgb(255, 49, 49);
+    text-decoration: underline;
+    font-size: 0.7rem;
+}
+@media (max-width: 880px){
+    .LoggStyle{
+        
+        width: 50%;
+        height: 60%;
+    
+    }
+}
+@media (max-width: 580px){
+    .cont{
+        
+        width: 100%;
+   
+    }
+    .LoggStyle{
+        
+        width: 70%;
+        height: 70%;
+   
+    }
+    #xBtn{
+        
+        width: 8%;
+        
+    }
+}
+@media (max-width: 490px){
+    
+    .LoggStyle{
+        
+        width: 85%;
+     
+    }
+    #xBtn{
+        
+        width: 8%;
+        
+    }
+}
