@@ -153,6 +153,9 @@ h3 input{
     text-decoration: underline;
     font-size: 0.7rem;
 }
+button{
+    color: #000;
+}
 @media (max-width: 880px){
     .LoggStyle{
         
