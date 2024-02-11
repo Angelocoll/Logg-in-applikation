@@ -1,13 +1,13 @@
 let LogginBtn = document.querySelector("#LogginBtn");
 let LogginDiv = document.querySelector("#LogginDiv");
-let Usernamn;
-let Lösen;
+//objekt users
+let users = {};
 
 LogginBtn.addEventListener("click", () => {
-    LogginDiv.classList = ("LoggStyle");
+  LogginDiv.classList = "LoggStyle";
 
-    // Skapar allt som den ska innehålla
-    LogginDiv.innerHTML = `
+  // skapar log in form
+  LogginDiv.innerHTML = `
         <div id="Ny">
             <button id="xBtn">X</button>
             <h1>Välkommen</h1>
@@ -25,23 +25,21 @@ LogginBtn.addEventListener("click", () => {
         </div>
     `;
 
-    let x = document.querySelector("#xBtn");
-    let y = document.querySelector("#Ny");
-    
-    
-    // När du klickar på x-knappen, ta bort klassen från loggindiven och sedan ta bort den ny skapade parent diven med id #Ny så försvinner children också
-    x.addEventListener("click", () => {
-        LogginDiv.classList.remove("LoggStyle");
-        y.remove();
-    });
-    
-    // Går vi in på reg-knappen och vad den ska göra
-    //vi skapar bara nästan likadan som första
-    let RegBtn = document.querySelector("#Reg");
-    RegBtn.addEventListener("click", () => {
-        RegBtn.classList = ("RegStyle");
-        
-        LogginDiv.innerHTML = `
+  let x = document.querySelector("#xBtn");
+  let y = document.querySelector("#Ny");
+
+  // close log in formen
+  x.addEventListener("click", () => {
+    LogginDiv.classList.remove("LoggStyle");
+    y.remove();
+  });
+
+  // regar ny användare formen
+  let RegBtn = document.querySelector("#Reg");
+  RegBtn.addEventListener("click", () => {
+    RegBtn.classList = "RegStyle";
+
+    LogginDiv.innerHTML = `
         <div id="Ny">
         <button id="xBtn">X</button>
         <h1>Skapa konto</h1>
@@ -61,72 +59,73 @@ LogginBtn.addEventListener("click", () => {
         <p id="error"></p>
         </div>
         `;
-        
-        let x = document.querySelector("#xBtn");
-        let y = document.querySelector("#Ny");
-        
-        // När du klickar på x knappen ta bort classen från loggindiven och sedan ta bort den ny skapade parent diven med id #Ny så försvinner children också
-        x.addEventListener("click", () => {
-            LogginDiv.classList.remove("LoggStyle");
-            y.remove();
-        });
-        
-        let box = document.querySelector("#check");
-        let Skapabtn = document.querySelector("#SkapaBtn");
-        let Newuser = document.querySelector("#NewUser");
-        let NewLösen = document.querySelector("#NewLösen");
-        let p = document.querySelector("#error");
-        
-        Skapabtn.addEventListener("click", () => {
-            if (box.checked && NewLösen.value.length > 0 && Newuser.value.length > 0) {
-                Usernamn = Newuser.value;
-                Lösen = NewLösen.value;
-                LogginDiv.classList.remove("LoggStyle");
-                y.remove();
-                
-            } else {
-                p.innerText = "Glömt nåt ovanför!";
-            }
-        });
-    });
-    
-    //yes då skapar vi vad som händer om man klickar på logga in andra gången
-    let LoggaBtn2 = document.querySelector("#LoggBtn");
-    //skapar vi ett eventlistener
-    LoggaBtn2.addEventListener("click",()=>{
-        //målet med denna är att kolla om användarnamn inputen = Usernamn variabeln
-        //kolla om Lösenords inputen är = Lösen variablen
-        //om dessa stämmer så ska man kunna skapa upp en ny div som är tom och hälsar användarnamnet välkommen
-        
-        //man kan även kanske lägga in en checkbox kom ihåg mig och göra en if sats vid första logg in knappen om Usernamn.length är större än 0 lägg in användarnamn.value till Usernamn
-        let Namn = document.querySelector("#Namn");
-        let Lösenord = document.querySelector("#Lösenordet");
-        let p = document.querySelector("#error");
 
-        if(Namn.value === Usernamn && Lösenord.value === Lösen){
-            
-            LogginDiv.classList = ("LoggStyle");
-            
-            // Skapar allt som den ska innehålla
-            LogginDiv.innerHTML = `
+    let x = document.querySelector("#xBtn");
+    let y = document.querySelector("#Ny");
+
+    // stänger reg form
+    x.addEventListener("click", () => {
+      LogginDiv.classList.remove("LoggStyle");
+      y.remove();
+    });
+
+    // regar ny användare knappen
+    let Skapabtn = document.querySelector("#SkapaBtn");
+    let Newuser = document.querySelector("#NewUser");
+    let NewLösen = document.querySelector("#NewLösen");
+    let p = document.querySelector("#error");
+
+    Skapabtn.addEventListener("click", () => {
+      //om användarnamnetin har nödiga mellanslag i sig ta bort dom trim()
+      //kolla så att users inte redan har ett value med samma användarnamn value
+      //kollar så att man inte försöker skapa 2 användare med samma användarnamn
+      if (
+        Newuser.value.trim() !== "" &&
+        NewLösen.value.trim() !== "" &&
+        !users.hasOwnProperty(Newuser.value)
+      ) {
+        users[Newuser.value] = NewLösen.value;
+        sessionStorage.setItem("users", JSON.stringify(users));
+        LogginDiv.classList.remove("LoggStyle");
+        y.remove();
+      } else {
+        p.innerText = "Användarnamn upptaget eller fält tomt!";
+      }
+    });
+  });
+
+  // Log in knappen
+  let LoggaBtn2 = document.querySelector("#LoggBtn");
+  LoggaBtn2.addEventListener("click", () => {
+    let Namn = document.querySelector("#Namn");
+    let Lösenord = document.querySelector("#Lösenordet");
+    let p = document.querySelector("#error");
+
+    //hämtar sessionstorage med keyn alla users och lägger in detta i en variabel
+    let storedUsers = JSON.parse(sessionStorage.getItem("users"));
+    //om storedUsers hadownpropery(kollar så att objektet innehåller en specifik egenskap såg den kollar om storeduser innehåller likadant användarnamn som användaren har stoppat in i inputen)
+    if (
+      storedUsers.hasOwnProperty(Namn.value) &&
+      storedUsers[Namn.value] === Lösenord.value
+    ) {
+      LogginDiv.classList = "LoggStyle";
+      LogginDiv.innerHTML = `
             <div id="Ny">
             <button id="xBtn">X</button>
-            <h1>Välkommen! <br> User: <br>${Usernamn}!</h1>
+            <h1>Välkommen! <br> User: <br>${Namn.value}!</h1>
+            
             </div>
             `;
-            
-            let x = document.querySelector("#xBtn");
-            let y = document.querySelector("#Ny");
-            
-            // När du klickar på x-knappen, ta bort klassen från loggindiven och sedan ta bort den ny skapade parent diven med id #Ny så försvinner children också
-            x.addEventListener("click", () => {
-                LogginDiv.classList.remove("LoggStyle");
-                y.remove();
-            });
-        }else{
-            p.innerText = "User Undefined";
 
-        }
-        
-    });
+      let x = document.querySelector("#xBtn");
+      let y = document.querySelector("#Ny");
+
+      x.addEventListener("click", () => {
+        LogginDiv.classList.remove("LoggStyle");
+        y.remove();
+      });
+    } else {
+      p.innerText = "Felaktigt användarnamn eller lösenord!";
+    }
+  });
 });
